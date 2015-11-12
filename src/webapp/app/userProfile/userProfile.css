@@ -1,0 +1,14 @@
+#userprofile-map-canvas {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.user-picture img,
+.dog-picture img {
+    height: 100px;
+}
+
+.select-danger {
+    border-color: #ED848F;
+}

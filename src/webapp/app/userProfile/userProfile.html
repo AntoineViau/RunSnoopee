@@ -1,0 +1,129 @@
+<div ng-controller="userProfileController as profile" class="page userProfile">
+
+    <div class="row">
+        <div class="col-md-6">
+            <section class="panel panel-default">
+                <div class="panel-heading"><strong><span class="fa fa-user"></span> Moi</strong></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <input type="text" placeholder="Pseudo" class="form-control" ng-model="profile.user.nickName" ng-class="{'input-danger': !profile.user.nickName}">
+                    </div>
+                    <div class=" form-group ">
+                        <input type="text " placeholder="Email " class="form-control " ng-model="profile.user.email " ng-class="{ 'input-danger': !profile.user.email} ">
+                    </div>
+                    <div class="form-group ">
+                        <input type="password " placeholder="Mot de passe " class="form-control " ng-model="profile.user.password ">
+                    </div>
+                    <div class="form-group ">
+                        <div class="row ">
+                            <div class="col-md-6 ">
+                                <input type="text " placeholder="Prénom " class="form-control " ng-model="profile.user.firstName " ng-class="{ 'input-danger': !profile.user.firstName}">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" placeholder="Nom" class="form-control" ng-model="profile.user.lastName" ng-class="{'input-danger': !profile.user.lastName}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" form-group ">
+                        <input type="text " ng-model="profile.user.address " typeahead="result.formatted_address for result in profile.getAddress($viewValue) " class="form-control input-lg " placeholder="Votre rue, quartier, ville... " typeahead-loading="Chargement... " typeahead-min-length="3 " typeahead-editable="false " ng-class="{ 'input-danger': !profile.user.address}" />
+                    </div>
+                    <div class="form-group" ng-show="app.isUserRunner()">
+                        <span class="ui-select">
+                                <select ng-model="profile.user.sportLevel" ng-options="id as sportLevel.label for (id, sportLevel) in profile.sportLevels">
+                                    <option value="">Niveau sportif</option>
+                                </select>
+                            </span>
+                    </div>
+
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" ng-model="profile.user.description" placeholder="A propos de moi..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" title="Choisir une photo..." data-file-model="profile.user.picture1" data-ui-file-upload class="btn-primary">
+                    </div>
+                    <div ng-show="profile.user.picture1.url" class="user-picture">
+                        <img ng-src="{{profile.user.picture1.url}}" />
+                    </div>
+            </section>
+            </div>
+
+            <div class="col-md-6">
+                <section class="panel panel-default" ng-show="profile.user.type=='dogger'">
+                    <div class="panel-heading"><strong><span class="fa fa-paw"></span> Mon chien</strong></div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <input type="text" placeholder="Nom" class="form-control" ng-model="profile.dog.name" ng-class="{'input-danger': !profile.dog.name}">
+                        </div>
+
+                        <div class="form-group">
+                            <span class="ui-select" ng-class="{'select-danger': !profile.dog.age}">
+                                <select ng-model="profile.dog.age" ng-options="age.value as age.label for age in profile.ages" >
+                                    <option value="">Age</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="ui-select" ng-class="{'select-danger': !profile.dog.breed}">
+                                <select ng-model="profile.dog.breed" ng-options="breed as breed for breed in profile.breeds">
+                                    <option value="">Race</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="ui-select" ng-class="{'select-danger': !profile.dog.size}">
+                                <select ng-model="profile.dog.size" ng-options="size.id as size.label for size in profile.sizes">   
+                                    <option value="">Taille</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <span class="ui-select" ng-class="{'select-danger': !profile.dog.sportLevel}">
+                                <select ng-model="profile.dog.sportLevel" ng-options="id as sportLevel.label for (id, sportLevel) in profile.sportLevels">
+                                    <option value="">Niveau sportif</option>
+                                </select>
+                            </span>
+                        </div>
+
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" ng-model="profile.dog.description" placeholder="A propos de mon chien..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="file" title="Choisir une photo..." data-file-model="profile.dog.picture1" data-ui-file-upload class="btn-primary">
+                        </div>
+                        <div ng-show="profile.dog.picture1.url" class="user-picture">
+                            <img ng-src="{{profile.dog.picture1.url}}" />
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <section class="panel panel-default" ng-show="profile.user.geoloc">
+            <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> Mon quartier</strong></div>
+            <div class="panel-body">
+                <div class="col-md-12" ng-show="profile.user.geoloc">
+                    <div style="width:100%;height:200px;">
+                        <div id="userprofile-map-canvas"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center">
+            <button class="btn btn-primary btn-lg" ng-click="profile.save()">Enregister</button>
+        </div>
+
+        <div class="divider divider-solid divider-lg pull-in"></div>
+
+        <div class="pull-right">
+            <button class="btn btn-danger btn-xs" ng-click="profile.deleteAccount()">Effacer mon compte</button>
+        </div>
+
+
+    </div>

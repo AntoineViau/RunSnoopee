@@ -1,0 +1,23 @@
+<div class="modal-header">
+    <h3>
+    Ecrire à {{mailTo.dstUser.nickName}}
+    </h3>
+</div>
+<div class="modal-body">
+    <div ng-hide="mailTo.doneMessage!==''">
+        <textarea class="form-control" rows="4" ng-model="mailTo.body"></textarea>
+    </div>
+    <div ng-show="mailTo.doneMessage!==''">
+        <h4 class="text-center">
+            {{mailTo.doneMessage}}
+        </h4>
+    </div>
+</div>
+<div class="modal-footer" ng-hide="mailTo.doneMessage!==''">
+    <div class="row" ng-hide="mailTo.sending">
+        <div class="col-sm-12 form-group text-center">
+            <button type="submit" class="btn btn-success" ng-click="mailTo.send()">Envoyer</button>
+            <button type="cancel" class="btn btn-info" ng-click="mailTo.cancel()">Annuler</button>
+        </div>
+    </div>
+</div>

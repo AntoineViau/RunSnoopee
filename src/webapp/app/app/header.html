@@ -1,0 +1,59 @@
+<header class="top-header clearfix">
+
+    <!-- Logo -->
+    <div class="logo" ng-class="{ 'bg-dark': ['11','31'].indexOf(admin.skin) >= 0,
+                     'bg-white': admin.skin === '21',
+                     'bg-primary': ['12','22','32'].indexOf(admin.skin) >= 0,
+                     'bg-success': ['13','23','33'].indexOf(admin.skin) >= 0,
+                     'bg-info-alt': ['14','24','34'].indexOf(admin.skin) >= 0,
+                     'bg-warning': ['15','25','35'].indexOf(admin.skin) >= 0,
+                     'bg-danger': ['16','26','36'].indexOf(admin.skin) >= 0,
+                    }">
+        <a href="#/">
+            <img src="img/logo79x40.png" />
+        </a>
+    </div>
+
+    <div class="top-nav">
+        <ul class="nav-left list-unstyled">
+            <li>
+                <a href="#/search"><i class="ti-search"></i><span class="visible-md visible-lg" style="display:inline !important">Recherche</span></a>
+            </li>
+            <li ng-class="{'app-ng-hide': !app.canUseApp()}">
+                <a href="#/mails"> <i class="ti-email"></i><span class="visible-md visible-lg" style="display:inline !important">Messagerie</span> </a>
+            </li>
+            <li ng-class="{'app-ng-hide': !app.isUserLoggedIn() || !app.isUserTyped()}">
+                <a href="#/userProfile"> <i class="ti-user"></i>
+                    <span ng-show="app.isUserDogger()"><i class="fa fa-paw"></i></span>
+                    <span class="visible-md visible-lg" style="display:inline !important">Profil</span>
+                </a>
+            </li>
+            <li ng-class="{'app-ng-hide': app.isUserLoggedIn()}">
+                <a href="#/signin"> <i class="ti-user"></i><span class="visible-md visible-lg" style="display:inline !important">Se connecter</span> </a>
+            </li>
+            <li ng-class="{'app-ng-hide': app.isUserLoggedIn()}">
+                <a href="#/signup"> <i class="ti-user"></i><span class="visible-md visible-lg" style="display:inline !important">S'inscrire</span> </a>
+            </li>
+        </ul>
+
+        <ul class="nav-right pull-right list-unstyled" ng-class="{'app-ng-hide': !app.canUseApp()}">
+            <li class="dropdown text-normal nav-profile" dropdown is-open="status.isopenProfile">
+                <a href="javascript:;" dropdown-toggle ng-disabled="disabled">
+                    <img ng-src="{{app.getUserThumbnailUrl()}}" alt="" class="img-circle img30_30">
+                    <span class="hidden-xs">
+                        <span>{{app.getUser().nickName}}</span>
+                    </span>
+                </a>
+                <ul class="dropdown-menu with-arrow pull-right">
+                    <li>
+                        <a href="" ng-click="app.signout()">
+                            <i class="ti-export"></i>
+                            <span>Déconnexion</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+</header>

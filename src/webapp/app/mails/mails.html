@@ -1,0 +1,52 @@
+<div class="page page-mail" ng-controller="mailsController as mails">
+    <div class="row">
+
+        <div class="col-sm-3 mail-categories">
+            <ul class="list-group">
+                <li class="list-group-item" ng-class="{'active':mails.currentSection=='received'}">
+                    <a href="javascript:;" ng-click="mails.loadReceived()">
+                        <i class="ti-folder"></i>Reçus
+                        <span ng-show="mails.nbUnread > 0" class="badge badge-info pull-right">{{mails.nbUnread}}</span>
+                    </a>
+                </li>
+                <li class="list-group-item" ng-class="{'active':mails.currentSection=='sent'}">
+                    <a href="javascript:;" ng-click="mails.loadSent()">
+                        <i class="ti-email"></i>Envoyés
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <section class="panel panel-default mail-container">
+
+                <div ng-hide="mails.messages.length > 0" class="row text-center page">
+                    <div class="col-sm-6 col-md-offset-3">
+                        <section class="panel panel-box">
+                            <div class="panel-top bg-info">
+                                <i class="ti-comments text-large"></i>
+                            </div>
+                            <div class="panel-bottom bg-reverse">
+                                <p class="size-h1">Aucun message</p>
+                                <p class="text-muted">pour le moment !</p>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+
+                <table ng-show="mails.messages.length > 0" class="table table-hover table-responsive">
+
+                    <tr ng-repeat="message in mails.messages" ng-class="{'mail-unread': message.unread}">
+                        <td ng-show="mails.currentSection=='received'" ng-click="mails.viewMessage(message)">De {{message.from.nickName}}</td>
+                        <td ng-show="mails.currentSection=='sent'" ng-click="mails.viewMessage(message)">A {{message.to.nickName}}</td>
+                        <td ng-click="mails.viewMessage(message)">{{message.body | limitTo: 70}} </td>
+                        <td ng-click="mails.viewMessage(message)">{{message.sendDate | date: 'dd/MM/yyyy hh:mm'}}</td>
+                        <td ng-click="mails.deleteMessage(message)">
+                            <a href="javascript:;" class="btn-icon btn-icon-sm bg-warning"><span class="ti-trash"></span></a>
+                        </td>
+                    </tr>
+
+                </table>
+            </section>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+<!doctype html>
+<!--[if lt IE 8]>         <html class="no-js lt-ie8"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Web Application</title>
+    <meta name="description" content="Responsive Admin Web App with Bootstrap and AngularJS">
+    <meta name="keywords" content="angularjs admin, admin templates, admin themes, bootstrap admin">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+
+    <!-- Needs images, fo
+nt... therefore can not be part of main.css -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,600italic,400,600,300,700" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="flatboard/dist/fonts/themify-icons/themify-icons.min.css">
+    <link rel="stylesheet" href="flatboard/dist/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="flatboard/dist/bower_components/weather-icons/css/weather-icons.min.css">
+    <!-- end Needs images -->
+
+    <link rel="stylesheet" href="flatboard/dist/styles/main.css">
+    <link rel="stylesheet" href="vendor/AngularJS-Toaster/toaster.css">
+    <link rel="stylesheet" href="vendor/angular-block-ui/dist/angular-block-ui.min.css">
+
+    <style type="text/css">
+    /* 
+    Ce app-ng-hide est là pour régler le problème de collision dans header.html 
+    entre la classe visible-* et ng-hide de angular. Apparemment visible-* a la
+    priorité, ce qui rend ng-show/ng-hide inopérant.
+    */
+    
+    .app-ng-hide {
+        display: block!important;
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+    </style>
+
+</head>
+
+<body data-ng-app="app" id="app" class="app" data-custom-page data-off-canvas-nav data-ng-controller="AppCtrl as app" data-ng-class=" { 'layout-boxed': admin.layout === 'boxed', 
+                            'nav-collapsed-min': admin.menu === 'collapsed' 
+          } ">
+
+
+    <div id="fb-root"></div>
+    <!--[if lt IE 9]>
+            <div class="lt-ie9-bg">
+                <p class="browsehappy">You are using an <strong>outdated</strong> browser.</p>
+                <p>Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+            </div>
+        <![endif]-->
+    <header data-ng-include=" 'app/app/header.html' " id="header" class="header-container" data-ng-class="{ 'header-fixed': admin.fixedHeader,
+                                  'bg-white': ['11','12','13','14','15','16','21'].indexOf(admin.skin) >= 0,
+                                  'bg-dark': admin.skin === '31',
+                                  'bg-primary': ['22','32'].indexOf(admin.skin) >= 0,
+                                  'bg-success': ['23','33'].indexOf(admin.skin) >= 0,
+                                  'bg-info-alt': ['24','34'].indexOf(admin.skin) >= 0,
+                                  'bg-warning': ['25','35'].indexOf(admin.skin) >= 0,
+                                  'bg-danger': ['26','36'].indexOf(admin.skin) >= 0
+                 }">
+
+    </header>
+
+    <div class="main-container" data-ng-class="{ 'app-nav-horizontal': admin.menu === 'horizontal' }">
+        <aside data-ng-include=" 'app/app/
+sidebar.html' " id="nav-container" class="nav-container" data-ng-class="{ 'nav-fixed': admin.fixedSidebar,
+                                    'nav-horizontal': admin.menu === 'horizontal',
+                                    'nav-vertical': admin.menu === 'vertical',
+                                    'bg-white': ['31','32','33','34','35','36'].indexOf(admin.skin) >= 0,
+                                    'bg-dark': ['31','32','33','34','35','36'].indexOf(admin.skin) < 0
+                   }">
+        </aside>
+
+
+        <div id="content" class="content-container">
+            <section class="view-container {{admin.pageTransition.class}}" ui-view></section>
+        </div>
+        <toaster-container toaster-options="{'closeButton': !0, 'position-class': 'toast-bottom-right', 'timeOut': '1000'}"></toaster-container>
+    </div>
+    <script src="flatboard/dist/scripts/vendor.js"></script>
+    <script src="flatboard/dist/scripts/ui.js"></script>
+    <script src="flatboard/dist/scripts/app.js"></script>
+
+    <!-- @if NODE_ENV='dev' -->
+    <link href="app/**/*.css" rel="stylesheet">
+    <script src="app/*/*.js"></script>
+    <script src="core/services/*/*.js"></script>
+    <script src="core/filters/*.js"></script>
+    <script src="app/fakeUsers/fakeUsers.js"></script>
+    <!-- @endif -->
+
+    <!-- @if NODE_ENV='release' -->
+    <link href="css/runsnoopee.css" rel="stylesheet">
+    <script src="js/runsnoopee.js"></script>
+    <!-- @endif -->
+
+    <script src="http://code.angularjs.org/1.0.8/i18n/angular-locale_fr-fr.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAg5PXnhakZbNxdSlbuORACqJaq_4D2rqs"></script>
+    <script src="vendor/x2js-v1.1.5/xml2json.min.js"></script>
+    <script src="vendor/angular-block-ui/dist/angular-block-ui.js"></script>
+    <script src="vendor/angular-ui-router/angular-ui-router.min.js"></script>
+    <script src="vendor/AngularJS-Toaster/toaster.js"></script>
+
+</body>
+
+</html>

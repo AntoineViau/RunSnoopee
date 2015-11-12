@@ -1,0 +1,11 @@
+aside {
+    height: 2px;
+}
+
+.top-nav .nav-left li a span {
+    margin-left: 1em;
+}
+
+#content {
+    margin: 5px;
+}

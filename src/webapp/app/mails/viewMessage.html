@@ -1,0 +1,36 @@
+<div class="modal-header" ng-init="inInbox=viewMessage.message.from.nickName">
+    <h3>
+    Message&nbsp;
+    <span ng-show="inInbox">de {{viewMessage.message.from.nickName}}</span> 
+    <span ng-show="!inInbox">à {{viewMessage.message.to.nickName}}</span> 
+    </h3>
+</div>
+
+<div class="modal-body">
+
+    <div>
+        {{viewMessage.message.body}}
+    </div>
+
+    <div ng-show="inInbox && viewMessage.reply==true" class="divider divider-dashed divider-lg pull-in"></div>
+
+    <div ng-hide="viewMessage.doneMessage!=='' || viewMessage.reply==false" ng-show="viewMessage.reply==true">
+        <textarea class="form-control" rows="4" ng-model="viewMessage.answer"></textarea>
+    </div>
+
+    <div ng-show="viewMessage.doneMessage!==''">
+        <h4 class="text-center">
+            {{viewMessage.doneMessage}}
+        </h4>
+    </div>
+</div>
+
+<div class="modal-footer" ng-hide="viewMessage.doneMessage!==''">
+    <div class="row" ng-hide="viewMessage.sending">
+        <div class="col-sm-12 form-group text-center">
+            <button class="btn btn-info" ng-click="viewMessage.reply=true" ng-hide="!inInbox || viewMessage.reply==true"><span class="fa fa-replay"></span> Répondre</button>
+            <button ng-show="viewMessage.reply==true" type="submit" class="btn btn-success" ng-click="viewMessage.sendReply()">Envoyer</button>
+            <button type="cancel" class="btn btn-info" ng-click="viewMessage.cancel()">Fermer</button>
+        </div>
+    </div>
+</div>

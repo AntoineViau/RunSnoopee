@@ -1,0 +1,34 @@
+<div ng-controller="selectTypeController as selectType" class="page">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 class="text-center">Je suis un...</h2>
+            <div class="space"></div>
+        </div>
+
+        <div class="col-sm-6">
+            <section class="panel panel-box">
+                <div class="panel-top bg-primary">
+                    <i ng-click="selectType.setDogger()" class="fa fa-paw text-large"></i>
+                </div>
+                <div class="panel-bottom bg-reverse">
+                    <p class="size-h1">Snooper</p>
+                    <button class="btn btn-lg btn-danger btn-block" ng-click="selectType.setDogger()">J'ai un chien qui veut courir !</button>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-sm-6">
+            <section class="panel panel-box" ng-click="selectType.setRunner()">
+                <div class="panel-top bg-primary">
+                    <i ng-click="selectType.setRunner()" class="fa fa-user text-large"></i>
+                </div>
+                <div class="panel-bottom bg-reverse">
+                    <p class="size-h1">Waffer</p>
+                    <button class="btn btn-lg btn-danger btn-block" ng-click="selectType.setRunner()">Je cherche un chien pour courir ! </button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>
